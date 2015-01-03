@@ -18,6 +18,8 @@ gem 'rake'
 
 gem 'shotgun'
 
+gem 'forecast_io'
+
 group :test do
   gem 'faker'
   gem 'rspec'

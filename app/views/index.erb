@@ -2,10 +2,18 @@
 
 <h3>Chi Town Crime Analysis</h3>
   
+	<% 	def parse_time(crimedate)
+		date = crimedate.split(" ")[0]
+		x = date.gsub("/", " ").split(" ")
+		format = x[2] + "-" + x[0] + "-" + x[1] + "T12:00:00"
+		format
+	end %>
+
 	<% @homicides.each do |crime| %>
 
 	<li><%= crime.primary_type  %></li>
 	<li><%= crime.date  %></li>
+	<li><%= parse_time("12/31/2013 11:55:00 PM") %></li>
 	<li><%= crime.description  %></li>
 
 	<% end %>

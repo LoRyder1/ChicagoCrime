@@ -1,6 +1,12 @@
 <div class="container">
+
+<h3>Chi Town Crime Analysis</h3>
   
-<p><%= @crimes  %></p>
+	<% @crimes.each do |crime| %>
+
+	<li><%= crime.primary_type  %></li>
+
+	<% end %>
 
 
 </div>

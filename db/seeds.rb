@@ -2,7 +2,7 @@
 require 'csv'
 require 'forecast_io'
 
-class Analyze
+class OneCrime
 	attr_reader :date, :primary_type, :description, :location_description, :latitude, :longitude, :community_area, :district
   def initialize(options={})
 		@date = options[:date]
@@ -16,7 +16,7 @@ class Analyze
   end
 end
 
-class Parsing
+class Parse
   attr_reader :crimes
   def initialize
     @crimes = []
@@ -24,20 +24,20 @@ class Parsing
 
   def load_crimes(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row_data|
-      @crimes << Analyze.new(row_data)
+      @crimes << OneCrime.new(row_data)
     end
   end
 end
 
-parse = Parsing.new
-parse.load_crimes("db/test.csv")
+parse = Parse.new
+parse.load_crimes("Crimes_-_2013.csv")
 
-drama = parse.crimes
+parsed_crimes = parse.crimes
 
-# p drama
+p parsed_crimes
 
-drama.each do |spectacle|
-  Crime.create!(date: spectacle.date, primary_type: spectacle.primary_type, description: spectacle.description, location_description: spectacle.location_description, latitude: spectacle.latitude, longitude: spectacle.longitude, community_area: spectacle.community_area, district: spectacle.district)
+parsed_crimes.each do |wrongdoing|
+  Crime.create!(date: wrongdoing.date, primary_type: wrongdoing.primary_type, description: wrongdoing.description, location_description: wrongdoing.location_description, latitude: wrongdoing.latitude, longitude: wrongdoing.longitude, community_area: wrongdoing.community_area, district: wrongdoing.district)
 end
 
 

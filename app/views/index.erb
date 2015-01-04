@@ -2,9 +2,11 @@
 
 <h3>Chi Town Crime Analysis</h3>
   
-	<% @crimes.each do |crime| %>
+	<% @homicides.each do |crime| %>
 
 	<li><%= crime.primary_type  %></li>
+	<li><%= crime.date  %></li>
+	<li><%= crime.description  %></li>
 
 	<% end %>
 

@@ -1,6 +1,6 @@
 get '/' do
 	@crimes = Crime.all	
-	@homicides = Crime.where(primary_type: "HOMICIDE").limit(10)
+	@homicides = Crime.where(primary_type: "HOMICIDE").order("RANDOM()").limit(5)
 
 	forecasting = Client.new
 	forecastAPIkey = "afcc7a0db1d5eef67ebc4e50464b1bff"
@@ -13,15 +13,18 @@ get '/' do
 
 		time = parse_time(crime.date)
 		@api_call = JSON.parse(forecasting.get("https://api.forecast.io/forecast/"+forecastAPIkey+"/"+latitude.to_s+","+longitude.to_s+","+(time)).body)
-		@temp << @api_call["currently"]["temperature"]
+
+
+		temp = @api_call["currently"]["temperature"]
+
+		specific_crime = Crime.find(crime.id)
+
+		crime.update_attributes(temp: temp)
+
 
 
 	end
 	
-	# raise @temp.inspect
-	# @homicides.each do |crime|
-	# 	parse_time(crime.date)
-	# end
 
 
 

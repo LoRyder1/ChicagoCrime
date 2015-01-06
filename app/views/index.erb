@@ -20,6 +20,35 @@
 		</tr>
 		<% end %>
 	</table>
-	
+
+
+<p><%=@count  %></p>	
+
+
+<!-- <p><%= @d_homicides %></p> -->
+<!-- <p><%= @uniq %></p> -->
+<hr>
+
+<div id="d3graph">
+	<label id="sorting"><input type="checkbox">Sort values</label>
+	<div id="show_history">
+
+		<script>window.temperature_data = <%= @hom2.to_json %>;</script>
+
+		<script>console.log(window.temperature_data)</script>
+
+	</div>
+	</div>
+
+
 
 </div>
+
+<!-- 
+a = [1, 1, 1, 34, 15]
+
+b = []
+
+a.each do |x|
+if x == 1
+b << x -->

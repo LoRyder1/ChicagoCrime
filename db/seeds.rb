@@ -30,6 +30,8 @@ class Parse
 end
 
 parse = Parse.new
+
+# parse.load_crimes("db/test.csv")
 parse.load_crimes("Crimes_-_2013.csv")
 
 parsed_crimes = parse.crimes

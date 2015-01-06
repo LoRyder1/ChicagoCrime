@@ -43,7 +43,56 @@ parsed_crimes.each do |wrongdoing|
 end
 
 
+class Client
+    def get(url)
+      # create the HTTP GET request
+      uri = URI.parse(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Get.new(URI(url))
 
+      # connect to the server and send the request
+      response = http.request(request)
+      response.body
+
+      response
+    end
+  end
+
+
+
+
+  @crimes = Crime.all 
+  @homicides = Crime.where(primary_type: "HOMICIDE")
+
+  forecasting = Client.new
+  forecastAPIkey = "521aad1331e6f66d7bf1ed4ec06b9aa3"
+  latitude = 41.87
+  longitude = -87.62
+
+  def parse_time(crimedate)
+    date = crimedate.split(" ")[0]
+    x = date.gsub("/", " ").split(" ")
+    format = x[2] + "-" + x[0] + "-" + x[1] + "T12:00:00"
+    format
+  end
+
+
+
+
+  @homicides.each do |crime|
+
+    time = parse_time(crime.date)
+    @api_call = JSON.parse(forecasting.get("https://api.forecast.io/forecast/"+forecastAPIkey+"/"+latitude.to_s+","+longitude.to_s+","+(time)).body)
+
+
+    temp = @api_call["currently"]["temperature"]
+
+    specific_crime = Crime.find(crime.id)
+
+    crime.update_attributes(temp: temp)
+  end
 
 
 

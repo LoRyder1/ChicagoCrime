@@ -1,6 +1,7 @@
 get '/' do
 
-	@homicides = Crime.where(primary_type: "HOMICIDE").order("RANDOM()").limit(10)
+	@homicides = Crime.where(primary_type: "HOMICIDE")
+	@homicides1 = Crime.where(primary_type: "HOMICIDE").order("RANDOM()").limit(10)
  
 # DETERMINE THE NUMBER OF HOMICIDES WITHIN A PARTICULAR TEMPERATURE RANGE - can clean up the below code with a case statement
 # For the bar graph
@@ -74,6 +75,7 @@ get '/' do
 		{temperature: "71-80", homicides: @eighty},
 		{temperature: "81+", homicides: @high}
 	]
+
 
 # ---------------------------------------------------------------------------------
 	

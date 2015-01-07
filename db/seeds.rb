@@ -71,7 +71,7 @@ class Client
   @homicides = Crime.where(primary_type: "HOMICIDE")
 
   forecasting = Client.new
-  forecastAPIkey = "521aad1331e6f66d7bf1ed4ec06b9aa3"
+  forecastAPIkey = "afcc7a0db1d5eef67ebc4e50464b1bff"
   latitude = 41.87
   longitude = -87.62
 

@@ -1,6 +1,6 @@
 .container {
   margin: 40px auto;
-  width: 600px;
+  width: 800px;
   padding: 0px 20px 20px 20px;
   border: 1px solid black;
   background-color: white;
@@ -11,7 +11,7 @@
 }*/
 
 body {
-    background-color: #FFFFF7;
+    background-color: #3399FF;
 }
 
 table {
@@ -59,13 +59,33 @@ table td {
 }
 
 .bar {
-  fill: steelblue;
+  fill: red;
   fill-opacity: .9;
 }
 
 .x.axis path {
   display: solid;
 }
+
+/*-----------color clipping-------------*/
+
+
+
+/*.x.axis path {
+  display: none;
+}*/
+
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.line.above {
+  stroke: #f00;
+}
+
+
 
 
 

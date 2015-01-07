@@ -22,7 +22,8 @@ get '/' do
 	# 	crime.update_attributes(temp: temp)
 	# end
 
-	@homicides = Crime.where(primary_type: "HOMICIDE")
+	@homicides = Crime.where(primary_type: "HOMICIDE").order("RANDOM()").limit(10)
+
 
 	twenty = []
 
@@ -93,17 +94,17 @@ get '/' do
 		{temperature: "71-80", homicides: @eighty},
 		{temperature: "81+", homicides: @high}
 	]
-	
 
-	# @drama = [
-	# 	{date: "jan 12", temperature: 50}, 
-	# 	{date: "feb 12", temperature: 80}, 
-	# 	{date: "june 12", temperature: 90}, 
-	# 	{date: "aug 12", temperature: 40}, 
-	# 	{date: "sept 12", temperature: 25} 
+	# @hom2 = [
+	# 	{temperature: "0-20", homicides: 10},
+	# 	{temperature: "21-40", homicides: 15},
+	# 	{temperature: "41-60", homicides: 20},
+	# 	{temperature: "61-70", homicides: 30},
+	# 	{temperature: "71-80", homicides: 40},
+	# 	{temperature: "81+", homicides: 50}
 	# ]
-
-	# @district_homicides = {district: , homicide_total: }
+	
+	
 
 	@hom1 = Crime.where(primary_type: "HOMICIDE")
 
@@ -112,20 +113,39 @@ get '/' do
 		@d_homicides << homicides.district
 	end
 
-	@uniq = @d_homicides.uniq
+	@uniq = @d_homicides.uniq.sort
+
+	@homicide_count = Hash.new(0)
+	@d_homicides.each { |district| @homicide_count[district] += 1 }
+
+
+	@district_homicides = [
+		{district: 1, homicide_total: @homicide_count[1] },
+		{district: 2, homicide_total: @homicide_count[2] },
+		{district: 3, homicide_total: @homicide_count[3] },
+		{district: 4, homicide_total: @homicide_count[4] },
+		{district: 5, homicide_total: @homicide_count[5] },
+		{district: 6, homicide_total: @homicide_count[6] },
+		{district: 7, homicide_total: @homicide_count[7] },
+		{district: 8, homicide_total: @homicide_count[8] },
+		{district: 9, homicide_total: @homicide_count[9] },
+		{district: 10, homicide_total: @homicide_count[10] },
+		{district: 11, homicide_total: @homicide_count[11] },
+		{district: 12, homicide_total: @homicide_count[12] },
+		{district: 14, homicide_total: @homicide_count[14] },
+		{district: 15, homicide_total: @homicide_count[15] },
+		{district: 16, homicide_total: @homicide_count[16] },
+		{district: 17, homicide_total: @homicide_count[17] },
+		{district: 18, homicide_total: @homicide_count[18] },
+		{district: 19, homicide_total: @homicide_count[19] },
+		{district: 20, homicide_total: @homicide_count[20] },
+		{district: 22, homicide_total: @homicide_count[22] },
+		{district: 24, homicide_total: @homicide_count[24] },
+		{district: 25, homicide_total: @homicide_count[25] }
+	]
 
   erb :index
 end
 
 			
-			# @history = [
-			# 	{date: Time.at(@year07time).strftime("%B, %Y"), temperature: @year07temp.to_i},
-			# 	{date: Time.at(@year00time).strftime("%B, %Y"), temperature: @year00temp.to_i},
-			# 	{date: Time.at(@year93time).strftime("%B, %Y"), temperature: @year93temp.to_i},
-			# 	{date: Time.at(@year86time).strftime("%B, %Y"), temperature: @year86temp.to_i},
-			# 	{date: Time.at(@year79time).strftime("%B, %Y"), temperature: @year79temp.to_i},
-			# 	{date: Time.at(@year72time).strftime("%B, %Y"), temperature: @year72temp.to_i}
-			# ]
-
-
 

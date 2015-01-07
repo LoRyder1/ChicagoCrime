@@ -3,7 +3,7 @@ require 'csv'
 require 'forecast_io'
 
 class OneCrime
-	attr_reader :date, :primary_type, :description, :location_description, :latitude, :longitude, :community_area, :district
+	attr_reader :date, :primary_type, :description, :location_description, :latitude, :longitude, :community_area, :district, :block
   def initialize(options={})
 		@date = options[:date]
     @primary_type = options[:primary_type]
@@ -13,6 +13,7 @@ class OneCrime
     @longitude = options[:longitude]
     @community_area = options[:community_area]
     @district = options[:district]
+    @block = options[:block]
   end
 end
 
@@ -39,7 +40,7 @@ parsed_crimes = parse.crimes
 p parsed_crimes
 
 parsed_crimes.each do |wrongdoing|
-  Crime.create!(date: wrongdoing.date, primary_type: wrongdoing.primary_type, description: wrongdoing.description, location_description: wrongdoing.location_description, latitude: wrongdoing.latitude, longitude: wrongdoing.longitude, community_area: wrongdoing.community_area, district: wrongdoing.district)
+  Crime.create!(date: wrongdoing.date, primary_type: wrongdoing.primary_type, description: wrongdoing.description, location_description: wrongdoing.location_description, latitude: wrongdoing.latitude, longitude: wrongdoing.longitude, community_area: wrongdoing.community_area, district: wrongdoing.district, block: wrongdoing.block)
 end
 
 

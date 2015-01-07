@@ -10,6 +10,7 @@ class CreateCrimes < ActiveRecord::Migration
   		t.integer :community_area
   		t.integer :district
       t.integer :temp
+      t.string :block
 
   		t.timestamps
   	end

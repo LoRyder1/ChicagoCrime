@@ -1,29 +1,9 @@
 get '/' do
-	# @crimes = Crime.all	
-	# @homicides = Crime.where(primary_type: "HOMICIDE")
-
-	# forecasting = Client.new
-	# forecastAPIkey = "afcc7a0db1d5eef67ebc4e50464b1bff"
-	# latitude = 41.87
-	# longitude = -87.62
-
-	# @temp =[]
-
-	# @homicides.each do |crime|
-
-	# 	time = parse_time(crime.date)
-	# 	@api_call = JSON.parse(forecasting.get("https://api.forecast.io/forecast/"+forecastAPIkey+"/"+latitude.to_s+","+longitude.to_s+","+(time)).body)
-
-
-	# 	temp = @api_call["currently"]["temperature"]
-
-	# 	specific_crime = Crime.find(crime.id)
-
-	# 	crime.update_attributes(temp: temp)
-	# end
 
 	@homicides = Crime.where(primary_type: "HOMICIDE").order("RANDOM()").limit(10)
-
+ 
+# DETERMINE THE NUMBER OF HOMICIDES WITHIN A PARTICULAR TEMPERATURE RANGE - can clean up the below code with a case statement
+# For the bar graph
 
 	twenty = []
 
@@ -95,16 +75,12 @@ get '/' do
 		{temperature: "81+", homicides: @high}
 	]
 
-	# @hom2 = [
-	# 	{temperature: "0-20", homicides: 10},
-	# 	{temperature: "21-40", homicides: 15},
-	# 	{temperature: "41-60", homicides: 20},
-	# 	{temperature: "61-70", homicides: 30},
-	# 	{temperature: "71-80", homicides: 40},
-	# 	{temperature: "81+", homicides: 50}
-	# ]
+# ---------------------------------------------------------------------------------
 	
-	
+# DETERMINE THE NUMBER OF HOMICIDES THAT OCCURRED IN A PARTICULAR DISTRICT
+# For the color clipper graph
+
+# Clunky to keep all of the below logic in this controller... perhaps use a helper?
 
 	@hom1 = Crime.where(primary_type: "HOMICIDE")
 

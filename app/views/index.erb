@@ -39,6 +39,7 @@
 	<label id="sorting"><input type="checkbox">Sort values</label>
 	<div id="show_history">
 
+<!-- Defining the temperature_data as the array of hom2 converted as a json object -->
 		<script>window.temperature_data = <%= @hom2.to_json %>;</script>
 
 		<script>console.log(window.temperature_data)</script>
@@ -51,7 +52,8 @@
 
 	<div id="color_clipping">
 		<div id="district_count">
-			
+
+<!-- Defining the homicide_count as the array of district_homicides converted as a json object -->
 			<script>window.homicide_count = <%= @district_homicides.to_json %>;</script>
 
 			<script>console.log(window.homicide_count)</script>

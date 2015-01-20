@@ -2,6 +2,8 @@
 require 'csv'
 require 'forecast_io'
 
+# Create a OneCrime class so that when the crimes are parsed from the 2013 Chicago Crime CSV file, the crimes can be converted into Ruby Crime objects so that they can be manipulated in Ruby
+
 class OneCrime
 	attr_reader :date, :primary_type, :description, :location_description, :latitude, :longitude, :community_area, :district, :block
   def initialize(options={})
@@ -17,6 +19,8 @@ class OneCrime
   end
 end
 
+# Create a Parse class which loads the crimes from the CSV files, parses them, and converts each individual crime into a OneCrime object
+
 class Parse
   attr_reader :crimes
   def initialize
@@ -30,19 +34,20 @@ class Parse
   end
 end
 
+# Create an instance of Parse in order to load the crimes from the CSV file.
 parse = Parse.new
 
-parse.load_crimes("db/test.csv")
-# parse.load_crimes("Crimes_-_2013.csv")
+# parse.load_crimes("db/test.csv")
+parse.load_crimes("Crimes_-_2013.csv")
 
 parsed_crimes = parse.crimes
 
-p parsed_crimes
-
+# Once the crimes are loaded and parsed, create Crimes that can be stored in the database
 parsed_crimes.each do |wrongdoing|
   Crime.create!(date: wrongdoing.date, primary_type: wrongdoing.primary_type, description: wrongdoing.description, location_description: wrongdoing.location_description, latitude: wrongdoing.latitude, longitude: wrongdoing.longitude, community_area: wrongdoing.community_area, district: wrongdoing.district, block: wrongdoing.block)
 end
 
+# Create a Client class 
 
 class Client
     def get(url)
@@ -62,13 +67,11 @@ class Client
   end
 
 
-
-
   @crimes = Crime.all 
   @homicides = Crime.where(primary_type: "HOMICIDE")
 
   forecasting = Client.new
-  forecastAPIkey = "521aad1331e6f66d7bf1ed4ec06b9aa3"
+  forecastAPIkey = "afcc7a0db1d5eef67ebc4e50464b1bff"
   latitude = 41.87
   longitude = -87.62
 
@@ -80,7 +83,7 @@ class Client
   end
 
 
-
+# For each homicide, make an API call to obtain and update the temperature, and save it to the database so that API calls are not made each time you want a homicide's temp
 
   @homicides.each do |crime|
 

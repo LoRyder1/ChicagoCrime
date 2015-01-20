@@ -6,12 +6,17 @@ require 'json'
 
 helpers do 
 	
+# Parsing the CSV date and time, and converting it to an acceptable format for the Forecast IO API call
+
 	def parse_time(crimedate)
 		date = crimedate.split(" ")[0]
 		x = date.gsub("/", " ").split(" ")
 		format = x[2] + "-" + x[0] + "-" + x[1] + "T12:00:00"
 		format
 	end
+
+# Making the HTTP request for the Forecast IO API call... this is very much a longhand approach - could've used the Forecast IO Gem and simplified some of this
+# Not toally necessary considering the logic is included in the seed file
 
 	class Client
 		def get(url)
@@ -29,8 +34,6 @@ helpers do
 	    response
 	  end
 	end
-
-
 end
 
 

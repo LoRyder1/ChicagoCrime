@@ -5,8 +5,6 @@
 <h4>In 2013, there were over 305,000 recorded crimes in the city of Chicago. Of those crimes, approximately 420 were first degree murders.</h4>
 
 <h4>This site pulls in data from those homicides (via a CSV file), parses them, turns them into Ruby Crime objects, then uses temperature data from the Forecast IO API and the D3 JavaScript library to illustrate that the rate of homicide increases proportionally with the temperature.</h4>
-
-<h4>This site pulls in data from those homicides (via a CSV file), parses them, turns them into Ruby Crime objects, then uses temperature data from the Forecast IO API and the D3 JavaScript library to illustrate that the rate of homicide increases proportionally with the temperature.</h4>
 	
 	
 	<table>
@@ -17,7 +15,7 @@
 			<th>Block</th>
 			<th>Temp</th>
 		</tr>
-	<% @homicides.each do |crime| %>
+	<% @homicides1.each do |crime| %>
 
 		<tr>
 			<td><%= crime.date %></td>
@@ -29,7 +27,6 @@
 		<% end %>
 	</table>
 
-
 <h4>The bar chart highlights that finding and the second graph, the color clipper, shows the murder breakdown by district.</h4>
 
 
@@ -39,6 +36,7 @@
 	<label id="sorting"><input type="checkbox">Sort values</label>
 	<div id="show_history">
 
+<!-- Defining the temperature_data as the array of hom2 converted as a json object -->
 		<script>window.temperature_data = <%= @hom2.to_json %>;</script>
 
 		<script>console.log(window.temperature_data)</script>
@@ -51,7 +49,8 @@
 
 	<div id="color_clipping">
 		<div id="district_count">
-			
+
+<!-- Defining the homicide_count as the array of district_homicides converted as a json object -->
 			<script>window.homicide_count = <%= @district_homicides.to_json %>;</script>
 
 			<script>console.log(window.homicide_count)</script>

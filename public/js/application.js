@@ -1,14 +1,10 @@
-// $(document).ready(function() {
-//   // This is called after the document has loaded in its entirety
-//   // This guarantees that any elements we bind to will exist on the page
-//   // when we try to bind to them
+//---------------- Bar Chart ------------------------/
 
-//   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
-// });
+// Ready the document using jQuery
+
 $("#d3graph").ready(function() {
 
 var width = $("#d3graph").width();
-
 
 var margin = {top: 10, right: 30, bottom: 20, left: 40},
     width = width - margin.left - margin.right,
@@ -36,6 +32,8 @@ var svg = d3.select("#show_history").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   	.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// 
 
 var data = window.temperature_data;
 
@@ -103,8 +101,9 @@ var data = window.temperature_data;
 
 });
 
-//------------ Color Clipping------------------------/
 
+
+//---------------- Color Clipping Graph ------------------------/
 
 
 $("#color_clipping").ready(function() {
@@ -152,7 +151,6 @@ function draw(data) {
 
 draw(data);
 
-
   x.domain([data[0].district, data[data.length - 1].district]);
   y.domain(d3.extent(data, function(d) { return d.homicide_total; }));
 
@@ -197,11 +195,6 @@ draw(data);
       .attr("clip-path", function(d) { return "url(#clip-" + d + ")"; })
       .datum(data)
       .attr("d", line);
-
-
-
-
-
 });
 
 
